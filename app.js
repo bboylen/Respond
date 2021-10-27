@@ -36,3 +36,20 @@ function createTextElement(text) {
     },
   }
 }
+function render(element, container) {
+  //TODO
+}
+
+const Respond = {
+  createElement,
+  render,
+}
+
+const element = Respond.createElement(
+  "div",
+  {id: "foo"},
+  Respond.createElement("a", null, "bar"),
+  Respond.createElement("b")
+)
+
+Respond.render(element, container);
