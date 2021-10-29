@@ -34,22 +34,39 @@ function createTextElement(text) {
       nodeValue: text,
       children: [],
     },
-  }
+  };
 }
+
 function render(element, container) {
-  //TODO
+  const dom =
+    element.type === "TEXT_ELEMENT"
+      ? document.createTextNode("")
+      : document.createElement(element.type);
+
+  const isProperty = (key) => key !== "children";
+
+  Object.keys(element.props)
+    .filter(isProperty)
+    .forEach((name) => {
+      dom[name] = element.props[name];
+    });
+
+  element.props.children.forEach((child) => {
+    render(child, dom);
+  });
+  container.appendChild(dom);
 }
 
 const Respond = {
   createElement,
   render,
-}
+};
 
 const element = Respond.createElement(
   "div",
-  {id: "foo"},
+  { id: "foo" },
   Respond.createElement("a", null, "bar"),
   Respond.createElement("b")
-)
+);
 
 Respond.render(element, container);
