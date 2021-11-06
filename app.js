@@ -6,7 +6,7 @@
 //   },
 // }
 
-// const container = document.getElementById("root");
+ 
 
 // const node = document.createElement(element.type);
 // node["title"] = elements.props.title;
@@ -61,6 +61,8 @@ const Respond = {
   createElement,
   render,
 };
+
+const container = document.getElementById("root");
 
 const element = Respond.createElement(
   "div",
