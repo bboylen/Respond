@@ -57,6 +57,25 @@ function render(element, container) {
   container.appendChild(dom);
 }
 
+let nextUnitofWork = null;
+
+function workLoop(deadline) {
+  let shouldYield = false;
+  while (nextUnitofWork && !shouldYield) {
+    nextUnitofWork = performUnitOfWork(
+      nextUnitofWork
+    )
+    shouldYield = deadline.timeRemaining() - 1;
+  }
+  requestIdleCallback(workLoop);
+}
+
+requestIdleCallback(workLoop);
+
+function performUnitOfWork(nextUnitOfWork) {
+  // To Do
+}
+
 const Respond = {
   createElement,
   render,
